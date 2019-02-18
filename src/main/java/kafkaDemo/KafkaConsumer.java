@@ -1,3 +1,5 @@
+package kafkaDemo;
+
 import kafka.consumer.Consumer;
 import kafka.consumer.ConsumerConfig;
 import kafka.consumer.ConsumerIterator;
