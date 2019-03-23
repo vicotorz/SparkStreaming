@@ -19,7 +19,7 @@ object StatefulWordCount {
 
     // 如果使用了stateful的算子，必须要设置checkpoint
     // 在生产环境中，建议大家把checkpoint设置到HDFS的某个文件夹中
-    ssc.checkpoint(".")
+    ssc.checkpoint(".")//可以检查的临时文件（放在当前目录下）
 
     val lines = ssc.socketTextStream("localhost", 6789)
 
