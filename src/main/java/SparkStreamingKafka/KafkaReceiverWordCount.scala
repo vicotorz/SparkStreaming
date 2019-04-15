@@ -20,9 +20,10 @@ object KafkaReceiverWordCount {
     val ssc = new StreamingContext(sparkConf, Seconds(5))
     val topicMap = topics.split(",").map((_, numThreads.toInt)).toMap
     //Spark Streaming对接Kafka
+    //createStream
     val messages = KafkaUtils.createStream(ssc, zkQuorum, group,topicMap)
 
-    // TODO... 自己去测试为什么要取第二个
+    // 自己去测试为什么要取第二个
     messages.map(_._2).flatMap(_.split(" ")).map((_,1)).reduceByKey(_+_).print()
     ssc.start()
     ssc.awaitTermination()

@@ -25,12 +25,13 @@ object KafkaDirectWordCount {
     val topicsSet = topics.split(",").toSet
     val kafkaParams = Map[String,String]("metadata.broker.list"-> brokers)
 
-    //TODO... Spark Streaming如何对接Kafka
+    //Spark Streaming如何对接Kafka
+    //createDirectStream
     val messages = KafkaUtils.createDirectStream[String,String,StringDecoder,StringDecoder](
       ssc,kafkaParams,topicsSet
     )
 
-    // TODO... 自己去测试为什么要取第二个
+    // 自己去测试为什么要取第二个
     messages.map(_._2).flatMap(_.split(" ")).map((_,1)).reduceByKey(_+_).print()
 
     ssc.start()
